@@ -4,53 +4,46 @@ const qrDiv = document.querySelector(".qr");
 const generate = document.getElementById("generate");
 const download = document.getElementById("download");
 
-// download.disabled=true;
+// hide download button at start
+download.style.visibility = "hidden";
 
 generate.addEventListener("click", () => {
-    if (input.value.length >= 1) {
+    if (input.value.trim().length > 0) {
         genQrCode();
-        download.style.visibility="visible"
+        download.style.visibility = "visible";
+    } else {
+        alert("Enter Text or URL");
     }
-    else {
-        alert("Enter Text or URL")
-    }
-
-    
 });
 
 function genQrCode() {
-    download.disabled=false;
-    qrDiv.innerHTML = ""
+    qrDiv.innerHTML = ""; // clear old QR
+    download.disabled = false;
+
     new QRCode(qrDiv, {
         text: input.value,
-        height: size.value,
-        width: size.value,
-        colorLight: "white",
-        colorDark: "black"
-    })
-};
+        width: Number(size.value),
+        height: Number(size.value),
+        colorDark: "#000000",
+        colorLight: "#ffffff"
+    });
+}
 
-download.addEventListener("click",(e)=>{
+download.addEventListener("click", (e) => {
     e.preventDefault();
-   const img = document.querySelector(".qr img");
 
-if(img !== null){
-     fetch(img.src)
-   .then( res=> res.blob())
-   .then( (blob)=>{
-    const url = URL.createObjectURL(blob);
+    const img = qrDiv.querySelector("img");
+
+    if (!img) {
+        alert("Generate QR Code first");
+        return;
+    }
+
     const a = document.createElement("a");
-    a.href=url;
-    a.download="QR_Code.png";
+    a.href = img.src;
+    a.download = "QR_Code.png";
 
     document.body.appendChild(a);
     a.click();
-
-   document.body.removeChild(a);
-    URL.revokeObjectURL(url); 
-   } )  
-
-}
-   
-})
-
+    document.body.removeChild(a);
+});
