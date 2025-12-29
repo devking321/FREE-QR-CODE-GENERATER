@@ -3,8 +3,13 @@
     padding: 0px;
     font-family: sans-serif;
 }
+::-webkit-scrollbar{
+   width: 1px;
+}
 body{
-        overflow: hidden;
+    height: 130vh;
+    overflow-x: hidden;
+        overflow-y: auto;
 
 }
 
@@ -27,7 +32,7 @@ header #icon {
     position: relative;
     height: 60vh;
     width: 77vw;
-    box-shadow: 0px 0px 3px 0.2px #006400;
+    box-shadow: 0px 0px 3px 2px rgba(18, 114, 31, 0.2);
     /* border: 1px solid lightgrey; */
     border-radius: 4px;
     margin: auto;
@@ -35,7 +40,7 @@ header #icon {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    
+    background-color: rgba(18, 114, 31, 0.2);
 }
 
 .input-box {
@@ -138,6 +143,7 @@ header #icon {
     justify-content: center;
     font-weight: 200;
     visibility: hidden;
+    cursor: pointer;
 }
 
 
@@ -153,9 +159,34 @@ header #icon {
     display: flex;
     justify-content: center;
     align-items: center;
-   background: none;
+   background: white;
 }
 
 .qr img{
     background-color: red;
+}
+
+#msg{
+    position: absolute;
+    bottom: 0px;
+    left: 10px;
+    display: none;
+    width: 100%;
+    height: 22vh;
+    color: grey;
+    font-size: 11px;
+    color: red;
+   opacity: 0.8;
+}
+
+footer{
+    width: 100vw;
+    font-size: 0.5rem;
+    /* margin-top: 31px; */
+    word-break: break-all;
+    background-color: rgb(22, 99, 45);
+    /* margin-top: 55px; */
+    position: absolute;
+    bottom: -333px;
+    padding-left: 2vw;
 }
